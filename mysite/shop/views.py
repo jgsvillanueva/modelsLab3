@@ -162,12 +162,12 @@ class CartItemDetail(APIView):
 
     def get(self, request, pk, format=None):
         cartItem = self.get_object(pk)
-        serializer = ProductSerializer(cartItem)
+        serializer = CartItemSerializer(cartItem)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         cartItem = self.get_object(pk)
-        serializer = ProductSerializer(cartItem, data=request.data)
+        serializer = CartItemSerializer(cartItem, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
