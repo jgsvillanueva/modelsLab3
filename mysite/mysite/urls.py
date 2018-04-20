@@ -13,9 +13,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path
+from django.conf.urls import url
+from rest_framework.urlpatterns import format_suffix_patterns
+from shop import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    url(r'^product/$', views.ProductList.as_view()),
+    url(r'^product/(?P<pk>[0-9]+)/$', views.ProductDetail.as_view()),
+    url(r'^user/$', views.UserList.as_view()),
+    url(r'^user/(?P<pk>[0-9]+)/$', views.UserDetail.as_view()),
+    url(r'^cart/$', views.CartList.as_view()),
+    url(r'^cart/(?P<pk>[0-9]+)/$', views.CartDetail.as_view()),
+    url(r'^cart_item/$', views.CartItemList.as_view()),
+    url(r'^cart_item/(?P<pk>[0-9]+)/$', views.CartItemDetail.as_view()),
+
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)

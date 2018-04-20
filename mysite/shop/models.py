@@ -12,16 +12,25 @@ class User(models.Model):
     u_fname = models.CharField(max_length = 200)
     u_lname = models.CharField(max_length = 200)
 
+    def __str__(self):
+        return self.u_fname
+
 class Product(models.Model):
     prod_name = models.CharField(max_length = 200)
     prod_price = models.DecimalField(max_digits=18, decimal_places=2)
     prod_description = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.prod_name
 
 class Cart(time_stamp):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     cart_code = models.CharField(max_length = 30)
     cart_paid = models.BooleanField(default=False)
     total_price = models.DecimalField(max_digits=18, decimal_places=2, default=0.00)
+
+    def __str__(self):
+        return self.cart_code
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
